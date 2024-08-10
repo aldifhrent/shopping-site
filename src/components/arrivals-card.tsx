@@ -13,10 +13,10 @@ const ArrivalsCard = () => {
           height={334.4}
         />
 
-        <h1 className={cn("font-medium mt-[13.3px] text-[15.2px]")}>
+        <h1 className={cn("font-medium mt-[13.3px] text-[13px] md:text-[15.2px] ")}>
           Hoodies & Sweetshirt
         </h1>
-        <p className="text-[11.4px] font-medium leading-[23.8px] text-[#7F7F7F]">
+        <p className="text-[10px] md:text-[11.4px] font-medium leading-[23.8px] text-[#7F7F7F]">
           Explore now
         </p>
       </div>

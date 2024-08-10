@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "@/app/globals.css";
 import { SessionProvider } from "next-auth/react";
-import { Session } from "inspector";
+import RegisterModal from "@/components/ui/register-modal";
+import SignInModal from "@/components/ui/sign-in-modal";
 
 const poppins = Poppins({ subsets: ["latin"], weight: "400" });
 
@@ -18,9 +19,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={poppins.className}>
-        <SessionProvider>{children}</SessionProvider>
-      </body>
+        <body className={poppins.className}>
+          
+          <SessionProvider>
+            <SignInModal/>
+            <RegisterModal/>
+          {children}
+          </SessionProvider>
+          
+        </body>
     </html>
   );
 }

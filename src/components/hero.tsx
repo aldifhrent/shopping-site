@@ -14,8 +14,9 @@ const Hero = () => {
                 "max-w-[225.15px] font-bold text-[45.6px] uppercase"
               )}
             >
-              let&apos;s explore{" "}
-              <span className="bg-[#EBD96B] rotate-5 px-[12px]">unique</span>{" "}
+              <span className="bg-white w-full inline-block transform -rotate-[2deg]">let&apos;s</span>{" "}explore{" "}
+              <span className="bg-[#EBD96B] transform
+              w-full -rotate-[2deg] inline-block px-[12px]">unique</span>{" "}
               clothes.
             </h1>
             <p
@@ -33,7 +34,7 @@ const Hero = () => {
               SHOP NOW
             </Button>
           </div>
-          <div className="flex items-end">
+          <div className="flex items-end mx-0 md:mx-auto">
             <Image src="/hero.svg" alt="Hero Images" width={422} height={377} />
           </div>
         </div>

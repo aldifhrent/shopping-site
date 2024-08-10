@@ -21,9 +21,15 @@ import { navbar } from "@/const";
 import { Button } from "./ui/button";
 import Wrapper from "./wrapper";
 import Link from "next/link";
+import { useRegisterModal } from "@/app/hooks/registerModal";
+import { useLoginModal } from "@/app/hooks/loginModal";
+import { Separator } from "./ui/separator";
+import SignInModal from "./ui/sign-in-modal";
 const abel = Abel({ weight: "400", subsets: ["latin"] });
 
 const Header = () => {
+  const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpen = () => {
@@ -58,8 +64,10 @@ const Header = () => {
               </Link>
             ))}
             {user.status === "unauthenticated" ? (
-              <div>
-                <Button onClick={() => handleLogin("github")}>Sign Up</Button>
+              <div className="flex gap-x-2 w-full h-full">
+              <Button onClick={registerModal.onOpen} >Sign Up</Button>
+              <Separator orientation="vertical" className="text-black"/>
+              <Button onClick={loginModal.onOpen} variant="outline">Sign In</Button>
               </div>
             ) : (
               <DropdownMenu>
@@ -71,7 +79,7 @@ const Header = () => {
                     )}
                   >
                     Hi,{" "}
-                    <span className="font-bold">{user.data?.user?.name}</span>
+                    {/* <span className="font-bold">{user.data?.username}</span> */}
                   </h1>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
