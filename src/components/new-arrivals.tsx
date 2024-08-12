@@ -11,7 +11,7 @@ const newArrivals = () => {
             alt=""
             width={88.35}
             height={16.59}
-            className="absolute bottom-0 left-20"
+            className="absolute bottom-0 left-20 "
           />
           <h1 className="relative font-bold text-[22.8px] leading-[23.8px] tracking-[6%] z-10">
             NEW ARRIVALS

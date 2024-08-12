@@ -24,7 +24,7 @@ const AddProductPage = () => {
       name: "",
       description: "",
       price: 0,
-      image: "",
+      images: "",
     },
   });
   const onSubmit = async (values: z.infer<typeof ProductDTO>) => {
@@ -33,7 +33,7 @@ const AddProductPage = () => {
         name: values.name,
         description: values.description,
         price: values.price,
-        images: values.image,
+        images: values.images,
       });
     } catch (error) {
       console.log(error);
@@ -88,7 +88,7 @@ const AddProductPage = () => {
           />
           <FormField
             control={form.control}
-            name="image"
+            name="images"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Image</FormLabel>

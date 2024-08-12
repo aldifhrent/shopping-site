@@ -1,8 +1,9 @@
 import prismadb from "@/lib/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "next-auth/react";
 import { auth } from "../../../../auth";
 import { error } from "console";
+import { ProductDTO } from "@/lib/schema";
 export const GET = async () => {
   try {
     const products = await prismadb.product.findMany({});
@@ -13,10 +14,17 @@ export const GET = async () => {
   }
 };
 
-export async function POST(req: Request) {
+export async function POST(request: NextRequest) {
   try {
-    const body = await req.json();
-    const { name, description, price, images } = body;
+    const body = await request.json();
+
+    const result = ProductDTO.safeParse(body);
+
+    if (!result.success) {
+      return NextResponse.json({ error: "Invalid input data" }, { status: 400 });
+    }
+
+    const { name, description, price, images } = result.data;
 
     const product = await prismadb.product.create({
       data: {
@@ -26,8 +34,10 @@ export async function POST(req: Request) {
         images,
       },
     });
+
     return NextResponse.json(product);
   } catch (error) {
     console.error("[PRODUCT_POST]", error);
+    return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
   }
 }

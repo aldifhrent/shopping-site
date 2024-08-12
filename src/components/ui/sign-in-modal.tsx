@@ -19,10 +19,21 @@ import CustomInput from "./custom-input";
 import { DropdownMenuSeparator } from "./dropdown-menu";
 import { Separator } from "./separator";
 import Button from "../button";
+import { signIn } from "next-auth/react";
+import toast from "react-hot-toast";
 
 const SignInModal = () => {
   const signInModal = useLoginModal();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const handleLogin = async (provider: "google" | "github") => {
+    try {
+      ("user server");
+      await signIn(provider);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const {
     register,
@@ -36,20 +47,29 @@ const SignInModal = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
+    try {
+      const result = await signIn("credentials", {
+        ...data,
+        redirect: false,
+      })
 
-    axios
-      .post("/api/register", data)
-      .then(() => {
-        signInModal.onClose();
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+      if (result?.error) {
+        toast.error(result?.error)
+      } else {
+        toast.success("Logged in successfully!")
+      }
+
+      signInModal.onClose();
+
+      
+      
+    } catch (err) {
+      console.log("An error occurred:", err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const bodyContent = (
@@ -69,6 +89,7 @@ const SignInModal = () => {
         disabled={isLoading}
         register={register}
         errors={errors}
+        type="password"
         required
       />
       <Separator className="mt-2" />
@@ -76,7 +97,7 @@ const SignInModal = () => {
         <Button
           label="Sign with github"
           outline
-          onClick={() => {}}
+          onClick={() => handleLogin("github")}
           icon={AiFillGithub}
         />
         <Button

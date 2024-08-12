@@ -13,7 +13,7 @@ interface ButtonProps {
 }
 const Button = ({ label, onClick, disabled, outline, small, icon: Icon}: ButtonProps) => {
   return (
-    <button disabled={disabled} className={`relative disabled:opacity-70 disabled:cursor-not-allowed rounded-lg hover:opacity-70 transition w-full ${outline ? 'bg-white' : 'bg-rose-500'} ${outline ? 'border border-black' : 'border border-rose-500'} ${outline ? 'text-black' : 'text-white'} ${small ? 'py-1' : 'py-3'} ${small ? 'text-sm' : 'text-md'} ${small ? 'font-light' : 'font-semibold'}${small ? 'border-[1px]' : 'border-2'}`}>
+    <button disabled={disabled} onClick={onClick} className={`relative disabled:opacity-70 disabled:cursor-not-allowed rounded-lg hover:opacity-70 transition w-full ${outline ? 'bg-white' : 'bg-rose-500'} ${outline ? 'border border-black' : 'border border-rose-500'} ${outline ? 'text-black' : 'text-white'} ${small ? 'py-1' : 'py-3'} ${small ? 'text-sm' : 'text-md'} ${small ? 'font-light' : 'font-semibold'}${small ? 'border-[1px]' : 'border-2'}`}>
         {Icon && (
         <Icon
           size={24}

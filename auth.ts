@@ -14,32 +14,32 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         email: { label: "email", type: "text" },
         password: { label: "password", type: "password" },
       },
-      // async authorize(credentials) {
-      //   if (!credentials.email || !credentials.password) {
-      //     throw new Error("Invalid credentials");
-      //   }
+      async authorize(credentials) {
+        if (!credentials.email || !credentials.password) {
+          throw new Error("Invalid credentials");
+        }
 
-      //   const user = await prismadb.user.findUnique({
-      //     where: {
-      //       email: credentials.email as string,
-      //     },
-      //   });
+        const user = await prismadb.user.findUnique({
+          where: {
+            email: credentials.email as string,
+          },
+        });
 
-      //   if (!user) {
-      //     throw new Error("Invalid credentials");
-      //   }
+        if (!user) {
+          throw new Error("Invalid credentials");
+        }
 
-      //   const isCorrectPassword = await bcrypt.compare(
-      //     credentials.password as string,
-      //     user.hashedPassword as string
-      //   );
+        const isCorrectPassword = await bcrypt.compare(
+          credentials.password as string,
+          user.hashedPassword as string
+        );
 
-      //   if (!isCorrectPassword) {
-      //     throw new Error("Invalid credentials");
-      //   }
+        if (!isCorrectPassword) {
+          throw new Error("Invalid credentials");
+        }
 
-      //   return user;
-      // },
+        return user;
+      },
     }),
     GitHub({
       clientId: process.env.AUTH_GITHUB_ID!,
@@ -50,4 +50,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   session: {
     strategy: "jwt",
   },
+  pages: {
+    signIn: '/'
+  }
 });

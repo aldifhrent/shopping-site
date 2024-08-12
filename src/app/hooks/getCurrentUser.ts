@@ -4,7 +4,7 @@ import { auth } from "../../../auth";
 const getCurrentUser = async () => {
   const session = await auth();
 
-  if (!session?.user?.email) {
+  if(!session?.user?.email) {
     return null;
   }
 

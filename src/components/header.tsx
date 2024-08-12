@@ -37,14 +37,6 @@ const Header = () => {
   };
   const user = useSession();
   const cart = useCart((state) => state.cart);
-  const handleLogin = async (provider: "google" | "github") => {
-    try {
-      ("user server");
-      await signIn(provider);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return (
     <Wrapper>
       <header className=" h-full w-full">
@@ -71,15 +63,14 @@ const Header = () => {
               </div>
             ) : (
               <DropdownMenu>
-                <DropdownMenuTrigger className="p-2">
+                <DropdownMenuTrigger className="p-2 focus:outline outline-none">
                   <h1
                     className={cn(
                       "cursor-pointer font-bold hover:text-black",
                       abel.className
                     )}
                   >
-                    Hi,{" "}
-                    {/* <span className="font-bold">{user.data?.username}</span> */}
+                    Hi, <span className="font-bold">{user.data?.user?.name}</span>
                   </h1>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>

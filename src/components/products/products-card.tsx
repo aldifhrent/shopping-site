@@ -1,33 +1,44 @@
-import { formatPrice } from "@/lib/formatprice";
-import { Card, CardContent } from "../ui/card";
+import { cn } from "@/lib/utils";
+import { Poppins } from "next/font/google";
 import Image from "next/image";
-import { Button } from "../ui/button";
+import Link from "next/link";
+import { title } from "process";
 
-interface ProductCard {
-  id: string;
-  images: string;
-  name: string;
-  description: string;
-  price: number;
-  onClick: () => void;
+interface ProductCardProps {
+  id?: string;
+  images?: string;
+  name?: string;
+  price?: string;
 }
-const ProductCard = (props: ProductCard) => {
+const ProductCard = ({id, images, name, price}: ProductCardProps) => {
   return (
-    <Card key={props.id} className="max-w-[300px]">
-      <Image
-        src={props.images || "/placeholder-image.jpg"}
-        width={400}
-        height={300}
-        alt={props.name}
-        className="w-full h-[200px] object-cover"
-      />
-      <CardContent className="flex flex-col p-2">
-        <h2 className="text-xl font-semibold mb-2">{props.name}</h2>
-        <p className="text-gray-600 mb-2">{props.description}</p>
-        <p className="text-lg font-bold mb-4">{formatPrice(props.price)}</p>
-        <Button onClick={props.onClick}>Add To Cart</Button>
-      </CardContent>
-    </Card>
+    <div className="max-w-[229.9px] max-h-[384.13px]">
+      <div>
+        <Image
+          src="/arrivals/arrivals-1.svg"
+          alt="Arrival Products"
+          width={229.9}
+          height={334.4}
+        />
+
+        <h1
+          className={cn(
+            "font-medium mt-[13.3px] text-[13px] md:text-[15.2px] "
+          )}
+        >
+          {name || "Arrival Products"}
+        </h1>
+        <p>{price}</p>
+        <button>
+          <Link
+            href={`/product/${id}`}
+            className="text-[10px] md:text-[11.4px] font-medium leading-[23.8px] text-[#7F7F7F]"
+          >
+            View Details
+          </Link>
+        </button>
+      </div>
+    </div>
   );
 };
 
