@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <footer className="w-full h-full bg-[black]">
-      <div className="flex flex-col md:flex-row px-6 py-8 items-center justify-between">
+      <div className="flex flex-col md:flex-row px-6 py-8 justify-between">
         <div>
           <h1 className="text-white text-[10px] lg:text-[12px]">FASHION</h1>
           <p className="text-white text-[6.49px] lg:text-[8px]">

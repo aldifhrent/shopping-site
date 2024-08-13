@@ -1,43 +1,56 @@
-import { useCart } from "@/features/cart/hooks/use-cart";
-import { formatPrice } from "@/lib/formatprice";
-import Image from "next/image";
-import { X } from "lucide-react";
 import { Product } from "@prisma/client";
+import toast from "react-hot-toast";
+import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
 
-interface CardItem {
-  data: Product;
+interface StoreState {
+  cart: Product[];
+  addToCart: (userId: string, product: Product, quantity?: number) => void;
+  removeFromCart: (userId: string, productId: string) => void;
+  clearCart: (userId: string) => void;
 }
-const CartItem = ({ data }: CardItem) => {
-  const cart = useCart();
 
-  const onRemove = () => {
-    cart.removeFromCart(data.id);
-  };
-  return (
-    <li className="flex py-6 border-b">
-      <div className="relative h-48 w-48 rounded-md overflow-hidden sm:h-48 sm:w-48">
-        <Image
-          src={data.images || ""}
-          alt={data.name}
-          width="100"
-          height="100"
-          className="object-cover object-center"
-        />
-      </div>
-      <div className="relative ml-4 flex flex-1 flex-col justify-between sm:ml-6">
-        <div className="absolute z-10 right-0 top-0">
-          <X onClick={onRemove} />
-        </div>
-        <div className="relative pr-9 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:pr-0">
-          <div className="flex justify-between">
-            <p className=" text-lg font-semibold text-black">{data.name}</p>
-          </div>
-
-          <p>{formatPrice(data.price)}</p>
-        </div>
-      </div>
-    </li>
+// Helper function to create a cart store
+const createCartStore = (userId: string) =>
+  create<StoreState>()(
+    persist(
+      (set) => ({
+        cart: [],
+        addToCart: (userId, product, quantity = 1) =>
+          set((state) => {
+            const existingItem = state.cart.find(
+              (item) => item.id === product.id
+            );
+            if (existingItem) {
+              toast.error("Product is already added to cart");
+              return {
+                cart: state.cart.map((item) =>
+                  item.id === product.id ? { ...item } : item
+                ),
+              };
+            }
+            toast.success(`${product.name} added to cart`);
+            return { cart: [...state.cart, { ...product, quantity }] };
+          }),
+        removeFromCart: (userId, productId) =>
+          set((state) => {
+            const newCart = state.cart.filter(
+              (item) => item.id !== productId
+            );
+            toast.success("Product removed from cart");
+            return { cart: newCart };
+          }),
+        clearCart: (userId) =>
+          set(() => {
+            toast.success("Cart cleared");
+            return { cart: [] };
+          }),
+      }),
+      {
+        name: `cart-storage-${userId}`, // Unique storage key for each user
+        storage: createJSONStorage(() => localStorage),
+      }
+    )
   );
-};
 
-export default CartItem;
+export const useCart = (userId: string) => createCartStore(userId);

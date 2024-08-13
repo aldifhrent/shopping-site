@@ -5,7 +5,7 @@ import { SessionProvider } from "next-auth/react";
 import RegisterModal from "@/components/ui/register-modal";
 import SignInModal from "@/components/ui/sign-in-modal";
 import { Toaster } from "react-hot-toast";
-import ClientWrapper from "./client-wrapper";
+import ClientWrapper from "../client-wrapper";
 import QueryProvider from "@/lib/query-provider";
 const poppins = Poppins({ subsets: ["latin"], weight: "400" });
 
@@ -22,9 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <ClientWrapper>
-          <QueryProvider>{children}</QueryProvider>
-        </ClientWrapper>
+        <ClientWrapper>{children}</ClientWrapper>
       </body>
     </html>
   );
