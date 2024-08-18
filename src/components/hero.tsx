@@ -7,7 +7,7 @@ const Hero = () => {
   return (
     <Wrapper>
       <div className="mt-[24.9px] w-full h-full bg-[#F4F6F5] rounded-xl">
-        <div className="flex flex-col justify-between md:flex-row  ">
+        <div className="flex flex-col justify-between items-center md:items-end md:flex-row  ">
           <div className="flex flex-col pl-[56.53px] pb-[43.15px] pt-[36.57px]">
             <h1
               className={cn(

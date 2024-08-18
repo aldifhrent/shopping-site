@@ -27,7 +27,7 @@ export const useCart = create(
               ),
             };
           }
-          toast.success(`${product.name} added to cart`)
+          toast.success(`Product added to cart`)
           return { cart: [...state.cart, { ...product, quantity }] };
         }),
       removeFromCart: (productId: string) =>

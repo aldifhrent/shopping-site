@@ -6,9 +6,9 @@ import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Abel } from "next/font/google";
 import Image from "next/image";
-import CartItem from "./cart/cart-item";
 import { Product } from "@prisma/client";
 import toast from "react-hot-toast";
+import CartItem from "./cart/cart-item";
 
 const abel = Abel({ weight: "400", subsets: ["latin"] });
 

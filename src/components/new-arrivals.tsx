@@ -17,7 +17,7 @@ const newArrivals = () => {
             NEW ARRIVALS
           </h1>
         </div>
-        <div className="flex gap-x-12 mt-[51.35px]">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-8 gap-x-12 mt-[51.35px] gap-y-12">
           <ArrivalsCard />
           <ArrivalsCard />
           <ArrivalsCard />
