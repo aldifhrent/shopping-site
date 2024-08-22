@@ -3,14 +3,17 @@ import * as z from "zod";
 export const registerDTO = z
   .object({
     name: z.string().min(3, {
-      message: "Name atleast 3 characters long"
+      message: "Name atleast 3 characters long",
     }),
     email: z.string().email().toLowerCase(),
-    password: z.string().min(3, {
-      message: "Password atleast 3 characters long"
-    }).max(20, {
-      message: "Password should be between 3 and 20 characters"
-    }),
+    password: z
+      .string()
+      .min(3, {
+        message: "Password atleast 3 characters long",
+      })
+      .max(20, {
+        message: "Password should be between 3 and 20 characters",
+      }),
     confirmPassword: z.string().min(3),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -18,11 +21,20 @@ export const registerDTO = z
     path: ["confirmPassword"],
   });
 
-export const ProductDTO = z.object({
+const CategorySchema = z.object({
+  id: z.string().uuid(),
   name: z.string(),
-  description: z.string().optional(),
-  price: z.coerce.number(),
-  images: z.string().url(),
+});
+
+// Schema untuk produk
+export const ProductDTO = z.object({
+  id: z.string().uuid(),
+  name: z.string(),
+  description: z.string(),
+  price: z.number(),
+  images: z.string().nullable(), // nullable karena images bisa null
+  quantity: z.number(),
+  Categories: z.array(CategorySchema), // array of categories
 });
 
 export const loginDTO = z

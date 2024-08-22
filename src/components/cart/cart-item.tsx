@@ -17,7 +17,7 @@ const CartItem = ({ data }: CardItem) => {
     <li className="flex py-6 border-b">
       <div className="relative h-48 w-48 rounded-md overflow-hidden sm:h-48 sm:w-48">
         <Image
-          src={data.images || ""}
+          src={data.images || "/arrivals/arrivals-1.svg"}
           alt={data.name}
           width="100"
           height="100"

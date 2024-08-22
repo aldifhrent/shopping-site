@@ -1,13 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "@/app/globals.css";
-import { SessionProvider } from "next-auth/react";
-import RegisterModal from "@/components/ui/register-modal";
-import SignInModal from "@/components/ui/sign-in-modal";
-import { Toaster } from "react-hot-toast";
 import ClientWrapper from "./client-wrapper";
-import QueryProvider from "@/lib/query-provider";
-const poppins = Poppins({ subsets: ["latin"], weight: "400" });
+import { GeistMono } from "geist/font/mono";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,10 +16,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={poppins.className}>
-        <ClientWrapper>
-          <QueryProvider>{children}</QueryProvider>
-        </ClientWrapper>
+      <body className={GeistMono.className}>
+        <ClientWrapper>{children}</ClientWrapper>
       </body>
     </html>
   );

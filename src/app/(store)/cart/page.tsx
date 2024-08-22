@@ -1,10 +1,14 @@
+import CartItem from "@/components/cart/cart-item";
 import { useCart } from "@/features/cart/hooks/use-cart";
 import React from "react";
+import ClientCart from "./components/client-cart";
 
 const CartPage = () => {
-  const cart = useCart();
-
-  return <div>CartPage</div>;
+  return (
+    <main className="flex flex-col items-center">
+      <ClientCart />
+    </main>
+  );
 };
 
 export default CartPage;

@@ -3,25 +3,14 @@
 import axios from "axios";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import { useCallback, useState } from "react";
-import {
-  FieldValues,
-  RegisterOptions,
-  SubmitHandler,
-  useForm,
-  UseFormRegisterReturn,
-} from "react-hook-form";
+import { useState } from "react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import Modal from "./modals";
 import { useRegisterModal } from "@/app/hooks/registerModal";
 import Heading from "./heading";
-import { Input } from "./input";
 import CustomInput from "./custom-input";
-import { DropdownMenuSeparator } from "./dropdown-menu";
 import { Separator } from "./separator";
 import Button from "../button";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { registerDTO } from "@/lib/schema";
-import { z } from "zod";
 import { signIn } from "next-auth/react";
 
 const RegisterModal = () => {
@@ -43,7 +32,7 @@ const RegisterModal = () => {
     setIsLoading(true);
 
     axios
-      .post("/api/auth/register", data)
+      .post("/api/auth/account/register", data)
       .then(() => {
         registerModal.onClose();
       })

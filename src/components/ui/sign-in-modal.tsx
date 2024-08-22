@@ -53,18 +53,15 @@ const SignInModal = () => {
       const result = await signIn("credentials", {
         ...data,
         redirect: false,
-      })
+      });
 
       if (result?.error) {
-        toast.error(result?.error)
+        toast.error(result?.error);
       } else {
-        toast.success("Logged in successfully!")
+        toast.success("Logged in successfully!");
       }
 
       signInModal.onClose();
-
-      
-      
     } catch (err) {
       console.log("An error occurred:", err);
     } finally {
@@ -103,7 +100,7 @@ const SignInModal = () => {
         <Button
           label="Sign with google"
           outline
-          onClick={() => {}}
+          onClick={() => handleLogin("google")}
           icon={FcGoogle}
         />
       </div>

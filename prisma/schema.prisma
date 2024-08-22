@@ -8,19 +8,38 @@ datasource db {
 }
 
 model Product {
-  id          String   @id @default(uuid())
+  id          String     @id @default(uuid())
   name        String
   description String?
   price       Float
   images      String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  quantity    Int        @default(0)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  user        User[]
+  categories  Category[]
+  color       Color[]
+
+  size Size[]
+
+  @@map("products")
+}
+
+model Category {
+  id   String @id @default(uuid())
+  name String
+
+  product Product[]
+
+  @@map("categories")
 }
 
 enum Role {
   GUEST
   MEMBER
   ADMIN
+
+  @@map("roles")
 }
 
 model User {
@@ -34,7 +53,10 @@ model User {
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
 
-  Account Account[]
+  account Account[]
+  product Product[]
+
+  @@map("users")
 }
 
 model Account {
@@ -54,4 +76,27 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Color {
+  id        String    @id @default(uuid())
+  name      String
+  value     String
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@map("colors")
+}
+
+model Size {
+  id        String    @id @default(uuid())
+  name      String
+  value     String
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@map("sizes")
 }

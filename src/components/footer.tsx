@@ -9,29 +9,28 @@ const Footer = () => {
           </p>
         </div>
         <div className="flex gap-x-[50px]">
-        <div className="text-white">
-          <p className="text-white">Company</p>
-          <p>About</p>
-          <p>Contact Us</p>
-          <p>Support</p>
-          <p>Careers</p>
+          <div className="text-white">
+            <p className="text-white">Company</p>
+            <p>About</p>
+            <p>Contact Us</p>
+            <p>Support</p>
+            <p>Careers</p>
+          </div>
+          <div className="text-white">
+            <p className="text-white">Company</p>
+            <p>About</p>
+            <p>Contact Us</p>
+            <p>Support</p>
+            <p>Careers</p>
+          </div>
+          <div className="text-white">
+            <p className="text-white">Company</p>
+            <p>About</p>
+            <p>Contact Us</p>
+            <p>Support</p>
+            <p>Careers</p>
+          </div>
         </div>
-        <div className="text-white">
-          <p className="text-white">Company</p>
-          <p>About</p>
-          <p>Contact Us</p>
-          <p>Support</p>
-          <p>Careers</p>
-        </div>
-        <div className="text-white">
-          <p className="text-white">Company</p>
-          <p>About</p>
-          <p>Contact Us</p>
-          <p>Support</p>
-          <p>Careers</p>
-        </div>
-        </div>
-       
       </div>
     </footer>
   );

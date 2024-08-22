@@ -1,18 +1,27 @@
-import { z } from 'zod';
-import { NextRequest, NextResponse } from 'next/server';
-import bcrypt from 'bcrypt';// Adjust this import path as needed
-import { registerDTO } from '@/lib/schema';
-import prismadb from '@/lib/db';
+import { z } from "zod";
+import { NextRequest, NextResponse } from "next/server";
+import bcrypt from "bcrypt"; // Adjust this import path as needed
+import { registerDTO } from "@/lib/schema";
+import prismadb from "@/lib/db";
+import { auth } from "../../../../../../auth";
 
 export const POST = async (request: NextRequest) => {
   try {
+    const account = await auth();
+
+    if (!account) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     const body = await request.json();
 
     const result = registerDTO.safeParse(body);
 
     if (!result.success) {
       // If validation fails, return the error messages
-      return NextResponse.json({ errors: result.error.flatten() }, { status: 400 });
+      return NextResponse.json(
+        { errors: result.error.flatten() },
+        { status: 400 }
+      );
     }
 
     // If validation succeeds, use the parsed data
@@ -25,7 +34,7 @@ export const POST = async (request: NextRequest) => {
         email,
         name,
         hashedPassword,
-        role: 'MEMBER'
+        role: "MEMBER",
       },
     });
 
