@@ -37,17 +37,10 @@ const NewArrivals = () => {
             NEW ARRIVALS
           </h1>
         </div>
-<<<<<<< HEAD
         <div className="grid grid-cols-6  gap-x-12 mt-[51.35px]">
           {arrivals.map((arrival: Product) => (
             <ArrivalsCard key={arrival.id} product={arrival} />
           ))}
-=======
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-8 gap-x-12 mt-[51.35px] gap-y-12">
-          <ArrivalsCard />
-          <ArrivalsCard />
-          <ArrivalsCard />
->>>>>>> 8d80a130897fc9effc781d0d54fe31fcf3c1f3fe
         </div>
       </div>
     </section>

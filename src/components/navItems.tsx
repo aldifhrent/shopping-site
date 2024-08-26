@@ -42,11 +42,14 @@ const NavItems = () => {
       ))}
       {user.status == "authenticated" ? (
         <DropdownMenu>
-          <DropdownMenuTrigger className="flex gap-1">
-            <Avatar className="w-full rounded-full object-cover">
-              <AvatarImage src={user.data.user?.image || ""} />
-              <AvatarFallback> {user.data?.user?.name}</AvatarFallback>
-            </Avatar>
+          <DropdownMenuTrigger className="flex gap-1 items-center rounded-full object-cover">
+            <div>
+              <Avatar className="w-full rounded-full object-cover">
+                <AvatarImage src={user.data.user?.image || ""} />
+                <AvatarFallback> {user.data?.user?.name}</AvatarFallback>
+              </Avatar>
+            </div>
+            <h1>{user.data.user?.name}</h1>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="mt-2">
             <DropdownMenuItem>

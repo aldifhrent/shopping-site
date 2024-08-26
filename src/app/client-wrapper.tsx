@@ -11,22 +11,11 @@ type ClientWrapper = {
 };
 export default function ClientWrapper({ children }: ClientWrapper) {
   return (
-<<<<<<< HEAD
     <SessionProvider>
-      <QueryProvider>
-        <SignInModal />
-        <RegisterModal />
-        {children}
-      </QueryProvider>
-      <Toaster />
+      <SignInModal />
+      <RegisterModal />
+      <QueryProvider>{children}</QueryProvider>
+      <Toaster position="top-right" />
     </SessionProvider>
-=======
-      <SessionProvider>
-        <SignInModal />
-        <RegisterModal />
-        {children}
-        <Toaster position="top-right" />
-      </SessionProvider>
->>>>>>> 8d80a130897fc9effc781d0d54fe31fcf3c1f3fe
   );
 }
