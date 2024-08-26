@@ -1,4 +1,5 @@
 import { Product } from "@prisma/client";
+import toast from "react-hot-toast";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
@@ -19,12 +20,14 @@ export const useCart = create(
             (item) => item.id === product.id
           );
           if (existingItem) {
+            toast.error('Product is already added to cart')
             return {
               cart: state.cart.map((item) =>
                 item.id === product.id ? { ...item } : item
               ),
             };
           }
+          toast.success(`Product added to cart`)
           return { cart: [...state.cart, { ...product, quantity }] };
         }),
       removeFromCart: (productId: string) =>

@@ -93,13 +93,13 @@ const RegisterModal = () => {
       <Separator className="mt-2" />
       <div className="space-y-2">
         <Button
-          label="Sign with github"
+          label="Sign up with github"
           outline
           onClick={() => handleLogin("github")}
           icon={AiFillGithub}
         />
         <Button
-          label="Sign with google"
+          label="Sign up with google"
           outline
           onClick={() => handleLogin("google")}
           icon={FcGoogle}

@@ -5,8 +5,13 @@ import Wrapper from "./wrapper";
 const Hero = () => {
   return (
     <Wrapper>
+<<<<<<< HEAD
       <div className="mt-[24.9px] w-full h-full bg-[#F4F6F5] rounded-xl ">
         <div className="flex flex-col justify-between md:flex-row  ">
+=======
+      <div className="mt-[24.9px] w-full h-full bg-[#F4F6F5] rounded-xl">
+        <div className="flex flex-col justify-between items-center md:items-end md:flex-row  ">
+>>>>>>> 8d80a130897fc9effc781d0d54fe31fcf3c1f3fe
           <div className="flex flex-col pl-[56.53px] pb-[43.15px] pt-[36.57px]">
             <h1
               className={cn(

@@ -6,16 +6,19 @@ import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Abel } from "next/font/google";
 import Image from "next/image";
+import { Product } from "@prisma/client";
+import toast from "react-hot-toast";
 import CartItem from "./cart/cart-item";
 
 const abel = Abel({ weight: "400", subsets: ["latin"] });
 
 const SheetCart = () => {
   const cart = useCart();
+
   return (
     <Sheet>
-      <SheetTrigger className={cn(abel.className)}>
-        CART ({cart.cart.length})
+      <SheetTrigger className={cn("cursor-pointer text-gray-500 hover:text-black",abel.className)}>
+        CART {cart.cart.length > 0 ? `(${cart.cart.length})` : ''}
       </SheetTrigger>
       <SheetContent>
         <SheetTitle>Shopping Cart</SheetTitle>

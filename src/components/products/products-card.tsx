@@ -1,31 +1,32 @@
+'use client';
+
 import { cn } from "@/lib/utils";
-import { Poppins } from "next/font/google";
+import { Product } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
-import { title } from "process";
+import { Button } from "../ui/button";
+import { useCart } from "@/features/cart/hooks/use-cart";
 
 interface ProductCardProps {
-  id?: string;
+  id: string;
   images?: string;
   name?: string;
   price?: string;
+  onClick?: (product: Product) => void;
 }
-const ProductCard = ({id, images, name, price}: ProductCardProps) => {
+
+const ProductCard = ({ id, images, name, price, onClick }: ProductCardProps) => {
   return (
     <div className="max-w-[229.9px] max-h-[384.13px]">
-      <div>
+      <div className="flex flex-col items-start">
         <Image
-          src="/arrivals/arrivals-1.svg"
-          alt="Arrival Products"
+          src={images || "/arrivals/arrivals-1.svg"}
+          alt={name || "Arrival Products"}
           width={229.9}
           height={334.4}
         />
 
-        <h1
-          className={cn(
-            "font-medium mt-[13.3px] text-[13px] md:text-[15.2px] "
-          )}
-        >
+        <h1 className={cn("font-medium mt-[13.3px] text-[13px] md:text-[15.2px] ")}>
           {name || "Arrival Products"}
         </h1>
         <p>{price}</p>
