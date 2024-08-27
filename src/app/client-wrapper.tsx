@@ -12,10 +12,12 @@ type ClientWrapper = {
 export default function ClientWrapper({ children }: ClientWrapper) {
   return (
     <SessionProvider>
-      <SignInModal />
-      <RegisterModal />
-      <QueryProvider>{children}</QueryProvider>
-      <Toaster position="top-right" />
+      <QueryProvider>
+        <SignInModal />
+        <RegisterModal />
+        {children}
+        <Toaster />
+      </QueryProvider>
     </SessionProvider>
   );
 }

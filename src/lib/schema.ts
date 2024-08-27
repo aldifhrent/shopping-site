@@ -20,23 +20,23 @@ export const registerDTO = z
     message: "Password do not match",
     path: ["confirmPassword"],
   });
+export type RegisterValues = z.infer<typeof registerDTO>;
 
 const CategorySchema = z.object({
   id: z.string().uuid(),
   name: z.string(),
 });
-
+export type CategoryValues = z.infer<typeof CategorySchema>;
 // Schema untuk produk
 export const ProductDTO = z.object({
-  id: z.string().uuid(),
   name: z.string(),
   description: z.string(),
-  price: z.number(),
-  images: z.string().nullable(), // nullable karena images bisa null
-  quantity: z.number(),
-  Categories: z.array(CategorySchema), // array of categories
+  price: z.coerce.number(),
+  // images: z.string().nullable(), // nullable karena images bisa null
+  quantity: z.coerce.number(),
+  // categories: z.array(CategorySchema), // array of categories
 });
-
+export type ProductValues = z.infer<typeof ProductDTO>;
 export const loginDTO = z
   .object({
     email: z.string().email().toLowerCase(),
@@ -47,3 +47,4 @@ export const loginDTO = z
     message: "Password do not match",
     path: ["confirmPassword"],
   });
+export type LoginValues = z.infer<typeof loginDTO>;

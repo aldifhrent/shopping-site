@@ -12,6 +12,8 @@ export const GET = async (
       },
       include: {
         categories: true,
+        color: true,
+        size: true,
       },
     });
 

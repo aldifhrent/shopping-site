@@ -9,7 +9,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import React, { useEffect, useState } from "react";
-import ActionDashboard from "../components/action-dashboard";
 import { axiosInstance } from "@/lib/axios";
 
 const ColorsPage = () => {
@@ -50,9 +49,7 @@ const ColorsPage = () => {
                 />
               </TableCell>
 
-              <TableCell>
-                <ActionDashboard productId={color.id} />
-              </TableCell>
+              <TableCell></TableCell>
             </TableRow>
           ))}
         </TableBody>

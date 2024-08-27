@@ -13,7 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { axiosInstance } from "@/lib/axios";
 import { ProductDTO } from "@/lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
@@ -22,12 +22,13 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 import { useMutation } from "@tanstack/react-query";
 import { ProductType } from "@/lib/types";
+import { useFetchProductId } from "./mutation";
+
 const DashboardProductEdit = ({
   params,
 }: {
@@ -35,30 +36,28 @@ const DashboardProductEdit = ({
 }) => {
   const form = useForm<z.infer<typeof ProductDTO>>({
     resolver: zodResolver(ProductDTO),
-    defaultValues: {
-      id: "", // Ini bisa berupa string kosong atau UUID default
-      name: "",
-      description: "",
-      price: 0,
-      images: null, // karena images bisa null
-      quantity: 0,
-      Categories: [{ id: "", name: "" }], // default untuk array categories
-    },
   });
+
+  const product = useFetchProductId();
+  console.log(product.mutate);
+  useEffect(() => {
+    if (params.productName) {
+      product.mutate(params.productName, {
+        onSuccess: (data: any) => {
+          form.reset({
+            name: data.name,
+            description: data.description,
+            price: data.price,
+          });
+        },
+      });
+    }
+  }, [params.productName, form, product]);
 
   const onSubmit = (values: z.infer<typeof ProductDTO>) => {
     console.log(values);
   };
 
-  const product = useMutation({
-    mutationFn: async (name: string) => {
-      const query = await axiosInstance.get("/api/store/products/" + name);
-
-      return query;
-    },
-  });
-
-  console.log(product.data);
   return (
     <div>
       <Card className="p-12">
@@ -93,7 +92,7 @@ const DashboardProductEdit = ({
               name="price"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel>Price</FormLabel>
                   <FormControl>
                     <Input
                       type="number"
@@ -104,7 +103,7 @@ const DashboardProductEdit = ({
                 </FormItem>
               )}
             />
-            <FormField
+            {/* <FormField
               control={form.control}
               name="images"
               render={({ field }) => (
@@ -115,18 +114,17 @@ const DashboardProductEdit = ({
                       type="file"
                       onChange={(e) => {
                         if (e.target.files && e.target.files[0]) {
-                          field.onChange(e);
-                          // Handle file upload separately if needed
+                          field.onChange(e.target.files[0]);
                         }
                       }}
                     />
                   </FormControl>
                 </FormItem>
               )}
-            />
-            <FormField
+            /> */}
+            {/* <FormField
               control={form.control}
-              name="price"
+              name="quantity"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Quantity</FormLabel>
@@ -135,36 +133,47 @@ const DashboardProductEdit = ({
                   </FormControl>
                 </FormItem>
               )}
-            />
-            <FormField
+            /> */}
+            {/* <FormField
               control={form.control}
               name="Categories"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Categories</FormLabel>
                   <FormControl>
-                    <Select>
+                    <Select
+                      onValueChange={(value) => {
+                        const selectedCategory = product.data.find(
+                          (cat: ProductType) => cat.id === value
+                        );
+                        if (selectedCategory) {
+                          field.onChange([
+                            ...field.value.filter(
+                              (cat) => cat.id !== selectedCategory.id
+                            ),
+                            selectedCategory,
+                          ]);
+                        }
+                      }}
+                    >
                       <SelectTrigger className="w-[180px]">
                         <SelectValue placeholder="Select categories" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectContent>
-                          {product.data?.data?.map((category: ProductType) => (
-                            <SelectGroup key={category.id}>
-                              <SelectItem value={category.id}>
-                                {category.name}
-                              </SelectItem>
-                            </SelectGroup>
-                          ))}
-                        </SelectContent>
+                        {product.data.map((category: ProductType) => (
+                          <SelectGroup key={category.id}>
+                            <SelectItem value={category.id}>
+                              {category.name}
+                            </SelectItem>
+                          </SelectGroup>
+                        ))}
                       </SelectContent>
                     </Select>
                   </FormControl>
                 </FormItem>
               )}
-            />
+            /> */}
             <Button type="submit">Submit</Button>
-            {/* Tambahkan fields lainnya sesuai dengan schema ProductDTO */}
           </form>
         </Form>
       </Card>

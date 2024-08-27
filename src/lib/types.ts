@@ -1,4 +1,4 @@
-import { Category } from "@prisma/client";
+import { Category, Prisma } from "@prisma/client";
 
 export interface ProductType {
   products: any;
@@ -10,3 +10,23 @@ export interface ProductType {
   quantity: number;
   category: Category[];
 }
+
+export function getProductData() {
+  return {
+    id: true,
+    name: true,
+    price: true,
+    description: true,
+    images: true,
+    categories: {
+      select: {
+        id: true,
+        name: true,
+      },
+    },
+  } satisfies Prisma.ProductSelect;
+}
+
+export type ProductData = Prisma.UserGetPayload<{
+  select: ReturnType<typeof getProductData>;
+}>;

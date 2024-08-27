@@ -17,7 +17,7 @@ const DashboardHeader = () => {
         src={session?.user?.image || ""}
         alt="Image User"
         width={40}
-        height={30}
+        height={40}
         className="rounded-full"
       />
       <h1> Welcome, {session?.user?.name}</h1>

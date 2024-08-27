@@ -10,6 +10,11 @@ export const GET = async () => {
           gte: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000),
         },
       },
+      include: {
+        categories: true,
+        size: true,
+        color: true,
+      },
     });
 
     return NextResponse.json(arrivals);

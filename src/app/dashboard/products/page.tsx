@@ -9,7 +9,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import React, { useEffect, useState } from "react";
-import ActionDashboard from "../components/action-dashboard";
 import { formatPrice } from "@/lib/formatprice";
 import { axiosInstance } from "@/lib/axios";
 import {
@@ -26,6 +25,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { Product } from "@prisma/client";
 import useRemoveData from "./action";
 import useFetchProducts from "@/app/hooks/useFetchProduct";
+import { Button } from "@/components/ui/button";
 
 const ProductsDashboard = () => {
   const { data: products } = useFetchProducts();
@@ -34,6 +34,7 @@ const ProductsDashboard = () => {
   return (
     <Table>
       <TableHeader>
+        <Link href="/dashboard/products/add">Add Products</Link>
         <TableRow>
           <TableHead>No</TableHead>
           <TableHead>Product Name</TableHead>

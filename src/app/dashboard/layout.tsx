@@ -1,7 +1,6 @@
 import Link from "next/link";
 import DashboardHeader from "./components/dashboard-header";
-import { FaHome, FaBox, FaList, FaPallet } from "react-icons/fa";
-import { Palette } from "lucide-react";
+import { FaHome, FaBox, FaList } from "react-icons/fa";
 
 export default function DashboardLayout({
   children,

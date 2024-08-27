@@ -9,8 +9,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import React, { useState, useEffect } from "react";
-import ActionDashboard from "../components/action-dashboard";
-import { fetchSizes } from "@/actions/sizes";
 import { axiosInstance } from "@/lib/axios";
 
 const SizesPage = () => {
@@ -46,9 +44,7 @@ const SizesPage = () => {
               <TableCell>{index + 1}</TableCell>
               <TableCell>{size.name}</TableCell>
               <TableCell>{size.value}</TableCell>
-              <TableCell>
-                <ActionDashboard productId={size.id} />
-              </TableCell>
+              <TableCell></TableCell>
             </TableRow>
           ))}
         </TableBody>
